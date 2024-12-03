@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Terra INVicta</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <img src="assets/fondo.png" alt="Fondo" id="background-image">
+    <div id="main-container">
+        <div id="start-screen">
+            <div id="start-content">
+                <div id="start-logo">
+                    <img src="assets/logo.png" alt="Logo" id="logo-image">
+                </div>
+                <button id="play-button" class="start-button">Jugar</button>
+                <div id="difficulty-selection">
+                    <span>Seleccionar Dificultad:</span>
+                    <div id="difficulty-buttons">
+                        <button class="difficulty-button selected" data-difficulty="facil">Fácil</button>
+                        <button class="difficulty-button" data-difficulty="medio">Medio</button>
+                        <button class="difficulty-button" data-difficulty="dificil">Difícil</button>
+                    </div>
+                </div>
+                <button id="sound-button" class="start-button">
+                    <span id="sound-text">Mute Off</span>
+                    <img id="sound-icon" src="assets/mute_off.png" alt="Sonido">
+                </button>
+                <button id="info-button" class="start-button">Información</button>
+            </div>
+        </div>
+        <div id="game-container" class="hidden">
+            
+            <canvas id="game-canvas" width="800" height="730"></canvas>
+            <div id="ui-container">
+                <div id="logo">
+                    <img src="assets/logo.png" alt="Logo" id="logo-image-game">
+                </div>
+                <div id="stats">
+                    <div id="lives-container">
+                        <span id="lives-label">Vidas</span>
+                        <div id="hearts-container">
+                        </div>
+                    </div>
+                    <div id="score-container">
+                        <span id="score-label">Puntaje</span>
+                        <span id="score">0</span>
+                    </div>
+                    <div id="time-container">
+                        <span id="time-label">Tiempo</span>
+                        <span id="time">00:00</span>
+                    </div>
+                    <div id="best-score-container">
+                        <span id="best-score-label">Mejor Puntaje</span>
+                        <span id="best-score">0</span>
+                    </div>
+                </div>
+                <div id="buttons">
+                    <div class="button-group">
+                        <button id="reset-button">Iniciar partida</button>
+                        <button id="pause-button">Pause</button>
+                    </div>
+                    <div class="button-group">
+                        <button id="mute-button">
+                            <img id="mute-icon" src="assets/mute_off.png" alt="Mute">
+                        </button>
+                        <button id="back-to-menu-button">Volver al Inicio</button>
+                    </div>
+                </div>
+            </div>
+            <div id="virtual-keyboard" class="hidden">
+            </div>
+        </div>
+    </div>
+    <footer id="main-footer">
+        <p>Made by Inverosímil</p>
+    </footer>
+    <script src="game.js"></script>
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script>
+        console.log('FileSaver.js cargado:', typeof saveAs === 'function');
+    </script>    
+</body>
+</html>
