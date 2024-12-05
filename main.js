@@ -64,21 +64,46 @@ function showInfoModal() {
     });
 }
 const playButton = document.getElementById('play-button');
-playButton.addEventListener('click', () => {
+function startGame() {
     const startScreen = document.getElementById('start-screen');
     const gameContainer = document.getElementById('game-container');
-    startScreen.classList.add('slide-up-out');
-    setTimeout(() => {
+    const hiddenInput = document.getElementById('hidden-input');
+
+    // Remover la clase 'hidden' y mostrar el contenedor del juego
+    gameContainer.classList.remove('hidden');
+    gameContainer.style.display = 'flex';
+
+    // Enfocar el input y iniciar el juego inmediatamente
+    hiddenInput.focus();
+    initGame(selectedDifficulty, isMuted);
+
+    if (isMobile) {
+        // **Para dispositivos móviles:**
+        // Saltar las animaciones y ocultar la pantalla de inicio directamente
         startScreen.style.display = 'none';
-        startScreen.classList.remove('slide-up-out');
-        gameContainer.classList.remove('hidden');
-        gameContainer.style.display = 'flex';
-        gameContainer.classList.remove('slide-up-in');
-        void gameContainer.offsetWidth; // Forzar reflow
-        gameContainer.classList.add('slide-up-in');
-        initGame(selectedDifficulty, isMuted);
+    } else {
+        // **Para PC:**
+        // Ejecutar las animaciones de salida de la pantalla de inicio
+        startScreen.classList.add('slide-up-out');
+        
         setTimeout(() => {
+            // Al finalizar la animación, ocultar la pantalla de inicio
+            startScreen.style.display = 'none';
+            startScreen.classList.remove('slide-up-out');
+
+            // Animar la entrada del contenedor del juego
             gameContainer.classList.remove('slide-up-in');
-        }, 1000);
-    }, 1000);
+            void gameContainer.offsetWidth; // Forzar reflow para reiniciar la animación
+            gameContainer.classList.add('slide-up-in');
+        }, 1000); // Asegúrate de que este tiempo coincida con la duración de la animación CSS
+    }
+}
+
+
+
+playButton.addEventListener('click', startGame);
+playButton.addEventListener('touchend', (e) => {
+    // Importante: no uses e.preventDefault() aquí. iOS necesita el evento nativo intacto.
+    // e.preventDefault(); // NO
+    startGame();
 });
