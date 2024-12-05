@@ -161,34 +161,86 @@ body {
     font-size: 20px;
     cursor: pointer;
 }
+#hidden-input {
+    display: none;
+}
 @media (max-width: 1000px) {
+    html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Evita scroll vertical */
+        height: 100%;
+        touch-action: none; 
+        overscroll-behavior: none;
+    }
     #main-container {
         display: flex;
         flex-direction: column;
+        justify-content: flex-start;
+        align-items: center; /* opcional: si deseas centrar horizontalmente el canvas y UI */
         min-height: 100vh;
+        margin: 0;
+        padding: 0;
     }
+
     #game-container {
+        display: flex;
+        flex-direction: column; /* Canvas arriba, luego UI */
+        justify-content: flex-start;
+        align-items: center; 
+        width: 100%;
+        max-width: 1200px;
+        margin: 0;
+        padding: 0;
+    }
+
+    #game-canvas {
+        width: 95%;
+        height: auto;
+        border: 1px solid #fff;
+        image-rendering: pixelated; 
+        background-image: url('assets/background.png');
+        background-size: 100% auto; 
+        background-position: bottom center; 
+        background-repeat: no-repeat; 
+        margin: 0; /* Sin márgenes arriba */
+        padding: 0;
+    }
+
+    #ui-container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        flex: 1 0 auto;
+        justify-content: flex-start;
+        margin: 0;
+        padding: 0;
         width: 100%;
     }
-    #game-canvas {
+
+    #stats, #buttons {
+        margin:0;
+        padding:0;
         width: 100%;
-        height: auto;
     }
+
+    #hidden-input {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        border: none;
+        background: transparent;
+        z-index: 9999;
+    }
+    
     #logo {
         display: none;
     }
-    #ui-container {
-        width: 100%;
-        margin-top: 10px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-    }
+
+    
     #stats {
         flex: 0 0 auto;
         display: flex;
@@ -254,46 +306,6 @@ body {
         width: 6vw;
         height: 6vw;
     }
-    #virtual-keyboard {
-        display: flex;
-        flex-direction: column;
-        justify-content: stretch;
-        width: 100%;
-        flex-grow: 1;
-        margin: 0;
-        background-color: #000; 
-        background-image: url('assets/background.png'); 
-        background-size: cover;
-        background-position: center;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5); 
-    }
-    .keyboard-row {
-        flex: 1 1 0; 
-        display: flex;
-        justify-content: space-around;
-        width: 100%;
-        margin: 0; 
-    }
-    #virtual-keyboard button {
-        flex: 1 1 auto;
-        margin: 2px;
-        font-size: 4vw;
-        padding: 5px;
-        height: 100%;
-        box-sizing: border-box;
-        background-color: rgba(255, 255, 255, 0.1);
-        color: #fff;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 5px;
-        text-shadow: 0 0 5px rgba(255, 255, 255, 0.7); 
-        font-family: 'Orbitron', sans-serif; 
-    }
-    #virtual-keyboard button:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-    }
-    #virtual-keyboard button:active {
-        background-color: rgba(255, 255, 255, 0.3);
-    }
     .special-char {
         background-color: rgba(255, 165, 0, 0.1); 
     }
@@ -306,21 +318,13 @@ body {
     .soltar-key:hover {
         background-color: rgba(255, 0, 0, 0.2);
     }
-    #virtual-keyboard .special-key {
-        flex: 1 1 1.5;
-    }
-    #virtual-keyboard .soltar-key {
-        background-color: #b92c2c;
-        color: #fff;
-    }
-    #virtual-keyboard .soltar-key:hover {
-        background-color: #882222;
-    }
     #main-footer {
         position: relative;
         flex-shrink: 0;
         width: 100%;
     }
+
+    
 }
 #main-footer {
     position: fixed;
