@@ -435,63 +435,31 @@ function initGame(difficulty = 'facil', muted = false) {
     gameInterval = setInterval(gameLoop, 1000 / 60); 
     scheduleNextEnemySpawn();
     requestAnimationFrame(updateTime);
-    if (isMobile) {
-        document.getElementById('virtual-keyboard').classList.remove('hidden');
-        generateVirtualKeyboard(); 
-    } else {
-        document.getElementById('virtual-keyboard').classList.add('hidden');
-    }
-}
-function generateVirtualKeyboard() {
-    const keyboardContainer = document.getElementById('virtual-keyboard');
-    keyboardContainer.innerHTML = ''; 
-    const rows = [
-        ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-        ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ñ'],
-        ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
-        ['´', 'Soltar', '¨']
-    ];
-    rows.forEach((rowKeys, rowIndex) => {
-        const row = document.createElement('div');
-        row.classList.add('keyboard-row');
-        rowKeys.forEach(key => {
-            const keyButton = document.createElement('button');
-            keyButton.textContent = key;
-            keyButton.dataset.key = key.toLowerCase();
-            keyButton.addEventListener('click', handleVirtualKeyPress);
-            if (key === '´' || key === '¨') {
-                keyButton.classList.add('special-char');
-            }
-            if (key === 'Soltar') {
-                keyButton.classList.add('soltar-key');
-                keyButton.dataset.key = 'soltar';
-            }
-            row.appendChild(keyButton);
-        });
-        keyboardContainer.appendChild(row);
-    });
-}
-function handleVirtualKeyPress(event) {
-    const key = event.currentTarget.dataset.key;
-    if (key === 'soltar') {
-        handleKeydown({ key: ' ', code: 'Space', preventDefault: () => {} });
-    } else if (key === '´' || key === '¨') {
-        specialKeyPressed = key;
-    } else {
-        let finalKey = key;
-        if (specialKeyPressed) {
-            if (specialKeyPressed === '´') {
-                const accentedChars = { 'a': 'á', 'e': 'é', 'i': 'í', 'o': 'ó', 'u': 'ú' };
-                finalKey = accentedChars[key] || key;
-            } else if (specialKeyPressed === '¨') {
-                const umlautChars = { 'a': 'ä', 'e': 'ë', 'i': 'ï', 'o': 'ö', 'u': 'ü' };
-                finalKey = umlautChars[key] || key;
-            }
-            specialKeyPressed = null; 
+    const hiddenInput = document.getElementById('hidden-input');
+    hiddenInput.focus();
+    
+    // Opcionalmente, para asegurarte de que siempre esté enfocado
+    setInterval(() => {
+        if (document.activeElement !== hiddenInput) {
+            hiddenInput.focus();
         }
-        handleKeydown({ key: finalKey, code: '', preventDefault: () => {} });
-    }
+    }, 1000);
+    
 }
+
+// Al inicio del archivo o en un lugar adecuado
+const hiddenInput = document.getElementById('hidden-input');
+
+hiddenInput.addEventListener('input', (e) => {
+    const value = e.target.value;
+    if (value.length > 0) {
+        const key = value.charAt(value.length - 1).toLowerCase();
+        handleVirtualKeyPress(key);
+        // Limpiar el campo de entrada para evitar acumulaciones
+        e.target.value = '';
+    }
+});
+
 function updateMuteButton() {
     muteIcon.src = isMuted ? muteOnImg.src : muteOffImg.src;
     laserSound.muted = isMuted;
@@ -779,6 +747,16 @@ function render() {
         ctx.restore();
     }
 }
+window.addEventListener('resize', adjustCanvasSize);
+
+function adjustCanvasSize() {
+    // Ajusta el tamaño del canvas o los elementos del juego según el tamaño de la ventana
+    const gameContainer = document.getElementById('game-container');
+    const newHeight = window.innerHeight;
+    gameContainer.style.height = `${newHeight}px`;
+    // Puedes ajustar el canvas y otros elementos aquí
+}
+
 function selectEnemyType() {
     const rand = Math.random() * 100;
     let cumulativeProbability = 0;
@@ -935,36 +913,36 @@ function getRandomSprite(type) {
 }
 document.addEventListener('keydown', handleKeydown);
 function handleKeydown(e) {
-    if (!e || typeof e.key !== 'string') return;
+    e.preventDefault(); // Prevenir el comportamiento predeterminado si es necesario
+    const key = e.key.toLowerCase();
+    handleVirtualKeyPress(key);
+}
+function handleVirtualKeyPress(key) {
+    if (!key || typeof key !== 'string') return;
+
     if (isGameOver) {
-        if (e.code === 'Enter') {
+        if (key === 'enter') {
             const retryButton = document.getElementById('retry-button');
             if (retryButton) {
                 retryButton.click();
             }
-            e.preventDefault();
-            return;
         }
-        e.preventDefault();
         return;
     }
-    if (e.code === 'Enter') {
+    if (key === 'enter') {
         pauseButton.click();
-        e.preventDefault(); 
         return;
     }
     if (isPaused) {
-        e.preventDefault();
         return;
     }
     if (!isGameStarted) {
-        if (e.code === 'Enter') {
+        if (key === 'enter') {
             initGame();
-            e.preventDefault();
         }
         return;
     }
-    if (e.code === 'Space') {
+    if (key === ' ') {
         if (currentEnemy && currentEnemy.currentCharIndex > 0) {
             const pointsToSubtract = currentEnemy.currentCharIndex;
             score = Math.max(0, score - pointsToSubtract);
@@ -972,10 +950,8 @@ function handleKeydown(e) {
             currentEnemy.currentCharIndex = 0;
             currentEnemy = null;
         }
-        e.preventDefault(); 
         return;
     }
-    let key = e.key.toLowerCase();
     if (key.length !== 1) return;
     if (!currentEnemy) {
         currentEnemy = enemies.find(enemy => !enemy.isDestroyed && enemy.word.charAt(0).toLowerCase() === key);
@@ -995,8 +971,10 @@ function handleKeydown(e) {
             currentEnemy = null; 
         }
     } else {
+        // Puedes agregar lógica para manejar errores de tipeo si lo deseas
     }
 }
+
 function animateScore() {
     scoreDisplay.classList.add('score-animation');
     setTimeout(() => {
@@ -1109,7 +1087,13 @@ function showGameOverScreen() {
         resetButton.textContent = 'Iniciar partida'; 
         render(); 
     });
-    document.addEventListener('keydown', handleRetryKey);
+    document.addEventListener('keydown', (e) => {
+        // Prevenir el comportamiento predeterminado si es necesario
+        e.preventDefault();
+        
+        const key = e.key.toLowerCase();
+        handleVirtualKeyPress(key);
+    });
 }
 function handleRetryKey(e) {
     if (e.code === 'Enter') {
@@ -1136,8 +1120,12 @@ function pauseGame() {
             enemy.isBlurred = true;
         });
         clearTimeout(enemySpawnTimeout);
+
+        // Quitar el foco del campo de entrada
+        hiddenInput.blur();
     }
 }
+
 function resumeGame() {
     if (isPaused) {
         isPaused = false;
@@ -1151,11 +1139,17 @@ function resumeGame() {
         startTime = Date.now() - time;
         requestAnimationFrame(updateTime);
         gameSpeedMultiplier = 2;
+
+        // Reenfocar el campo de entrada
+        hiddenInput.focus();
     }
 }
+
 muteButton.addEventListener('click', () => {
     isMuted = !isMuted;
     updateMuteButton();
+    hiddenInput.focus();
+
 });
 document.addEventListener('visibilitychange', handleVisibilityChange);
 function handleVisibilityChange() {
@@ -1182,6 +1176,8 @@ function handleVisibilityChange() {
         pauseButton.textContent = 'Pause'; 
         initGame(selectedDifficulty, isMuted);
     }
+    hiddenInput.focus();
+
 });
 loadSpriteSheets();
 window.initGame = initGame;
