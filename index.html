@@ -3,18 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Terra INVicta</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="styles.css">
+    <!-- Enlaces a hojas de estilo -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/game.css">
 </head>
 <body>
+
+    <!-- Imagen de fondo -->
     <img src="assets/fondo.png" alt="Fondo" id="background-image">
+
+    <!-- Contenedor principal de toda la aplicación -->
     <div id="main-container">
+
+        <!-- Pantalla de inicio -->
         <div id="start-screen">
             <div id="start-content">
+
+                <!-- Logo en la pantalla de inicio -->
                 <div id="start-logo">
                     <img src="assets/logo.png" alt="Logo" id="logo-image">
                 </div>
+
+                <!-- Botón para iniciar el juego -->
                 <button id="play-button" class="start-button">Jugar</button>
+
+                <!-- Selección de dificultad -->
                 <div id="difficulty-selection">
                     <span>Seleccionar Dificultad:</span>
                     <div id="difficulty-buttons">
@@ -23,39 +36,63 @@
                         <button class="difficulty-button" data-difficulty="dificil">Difícil</button>
                     </div>
                 </div>
+
+                <!-- Botón de sonido -->
                 <button id="sound-button" class="start-button">
                     <span id="sound-text">Mute Off</span>
                     <img id="sound-icon" src="assets/mute_off.png" alt="Sonido">
                 </button>
+
+                <!-- Botón de información -->
                 <button id="info-button" class="start-button">Información</button>
             </div>
         </div>
+        <!-- Fin pantalla de inicio -->
+
+        <!-- Contenedor del juego (pantalla principal del juego) -->
         <div id="game-container" class="hidden">
             
+            <!-- Canvas donde se renderiza el juego -->
             <canvas id="game-canvas" width="800" height="730"></canvas>
+
+            <!-- Contenedor de la interfaz de usuario dentro del juego -->
             <div id="ui-container">
+
+                <!-- Logo dentro del juego -->
                 <div id="logo">
                     <img src="assets/logo.png" alt="Logo" id="logo-image-game">
                 </div>
+
+                <!-- Sección de estadísticas y puntajes -->
                 <div id="stats">
+
+                    <!-- Contenedor de vidas -->
                     <div id="lives-container">
                         <span id="lives-label">Vidas</span>
-                        <div id="hearts-container">
-                        </div>
+                        <div id="hearts-container"></div>
                     </div>
+
+                    <!-- Contenedor de puntaje -->
                     <div id="score-container">
                         <span id="score-label">Puntaje</span>
                         <span id="score">0</span>
                     </div>
+
+                    <!-- Contenedor de tiempo -->
                     <div id="time-container">
                         <span id="time-label">Tiempo</span>
                         <span id="time">00:00</span>
                     </div>
+
+                    <!-- Contenedor del mejor puntaje -->
                     <div id="best-score-container">
                         <span id="best-score-label">Mejor Puntaje</span>
                         <span id="best-score">0</span>
                     </div>
                 </div>
+                <!-- Fin sección estadísticas -->
+
+                <!-- Botones de control del juego -->
                 <div id="buttons">
                     <div class="button-group">
                         <button id="reset-button">Iniciar partida</button>
@@ -68,20 +105,30 @@
                         <button id="back-to-menu-button">Volver al Inicio</button>
                     </div>
                 </div>
+                <!-- Fin botones de control -->
             </div>
-            <input type="text" id="hidden-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+            <!-- Fin ui-container -->
 
+            <!-- Input oculto para la captura de teclas en el juego -->
+            <input type="text" id="hidden-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
         </div>
+        <!-- Fin contenedor del juego -->
     </div>
+    <!-- Fin main-container -->
+
+    <!-- Pie de página -->
     <footer id="main-footer">
         <p>Made by Inverosímil</p>
     </footer>
-    <script src="game.js"></script>
-    <script src="main.js"></script>
+
+    <!-- Scripts del juego -->
+    <script src="scripts/game.js"></script>
+    <script src="scripts/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script>
+        // Verificación de carga de FileSaver.js
         console.log('FileSaver.js cargado:', typeof saveAs === 'function');
-    </script>    
+    </script>
+
 </body>
 </html>
-
