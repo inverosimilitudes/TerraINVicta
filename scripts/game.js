@@ -243,22 +243,22 @@ const playerMarginBottom = 20;
 const playerImg = new Image();
 const laserImg = new Image();
 const explosionImg = new Image();
-const laserSound = new Audio('assets/sounds/laser.mp3');
+const laserSound = new Audio('/TerraINVicta/assets/sounds/laser.mp3');
 laserSound.preload = 'auto';
-const explosionSound = new Audio('assets/sounds/explotion.mp3');
+const explosionSound = new Audio('/TerraINVicta/assets/sounds/explotion.mp3');
 explosionSound.preload = 'auto';
-const explosion2Sound = new Audio('assets/sounds/explotion2.mp3');
+const explosion2Sound = new Audio('/TerraINVicta/assets/sounds/explotion2.mp3');
 explosion2Sound.preload = 'auto';
 const heartsContainer = document.getElementById('hearts-container');
 let hearts = []; 
 const heartOnImg = new Image();
 const heartOffImg = new Image();
-heartOnImg.src = '../assets/heart_on.png';
-heartOffImg.src = '../assets/heart_off.png';
+heartOnImg.src = '/TerraINVicta/assets/heart_on.png';
+heartOffImg.src = '/TerraINVicta/assets/heart_off.png';
 const muteOnImg = new Image();
 const muteOffImg = new Image();
-muteOnImg.src = '../assets/mute_on.png';
-muteOffImg.src = '../assets/mute_off.png';
+muteOnImg.src = '/TerraINVicta/assets/mute_on.png';
+muteOffImg.src = '/TerraINVicta/assets/mute_off.png';
 const spriteSheets = {
     asteroids: [],
     moons: [],
@@ -338,7 +338,7 @@ function loadSpriteSheets() {
         const baseName = typeToBaseName[type];
         const imageCount = imageCounts[type];
         for (let i = 1; i <= imageCount; i++) {
-            const imagePath = `../assets/enemies/${type}/${baseName}_${i}.png`;
+            const imagePath = `/TerraINVicta/assets/enemies/${type}/${baseName}_${i}.png`;
             imagesToLoad++;
             loadImage(imagePath, (img) => {
                 if (!spriteSheets[type]) {
@@ -353,18 +353,18 @@ function loadSpriteSheets() {
         }
     });
     imagesToLoad += 3;
-    loadImage('../assets/player.png', (img) => {
+    loadImage('/TerraINVicta/assets/player.png', (img) => {
         playerImg.src = img.src;
         imagesLoaded++;
         if (imagesLoaded === imagesToLoad) {
             render(); 
         }
     });
-    loadImage('../assets/laser.png', (img) => {
+    loadImage('/TerraINVicta/assets/laser.png', (img) => {
         laserImg.src = img.src;
         imagesLoaded++;
     });
-    loadImage('../assets/explotion_sheet2.png', (img) => {
+    loadImage('/TerraINVicta/assets/explotion_sheet2.png', (img) => {
         explosionImg.src = img.src;
         imagesLoaded++;
     });
