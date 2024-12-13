@@ -67,7 +67,7 @@ playButton.addEventListener('touchend', () => {
  */
 function updateSoundButton() {
     soundText.textContent = soundOn ? 'Mute Off' : 'Mute On';
-    soundIcon.src = soundOn ? '../assets/mute_off.png' : '../assets/mute_on.png';
+    soundIcon.src = soundOn ? 'main/assets/mute_off.png' : 'main/assets/mute_on.png';
 }
 
 /**
