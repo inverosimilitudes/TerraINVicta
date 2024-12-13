@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap');
 
-/* ------------------------------------------------------------
-   ESTILOS GLOBALES
------------------------------------------------------------- */
-
 body {
     margin: 0;
     padding: 0;
@@ -12,7 +8,6 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-/* Imagen de fondo principal */
 #background-image {
     position: fixed;
     top: 0;
@@ -24,11 +19,6 @@ body {
     z-index: -1;
 }
 
-/* ------------------------------------------------------------
-   ESTILOS PANTALLA DE INICIO
------------------------------------------------------------- */
-
-/* Canvas opcional en la pantalla de inicio */
 #start-canvas {
     position: absolute;
     top: 0;
@@ -36,19 +26,17 @@ body {
     width: 100%;
     height: 100%;
     image-rendering: pixelated; 
-    background-image: url('../assets/fondo.png');
+    background-image: url('/TerraINVicta/assets/fondo.png');
     background-size: cover;
     background-position: center;
 }
 
-/* Contenedor principal del contenido */
 #main-container {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* Pantalla de inicio */
 #start-screen {
     flex: 1;
     position: relative;
@@ -56,7 +44,6 @@ body {
     overflow: hidden;
 }
 
-/* Contenido central en la pantalla de inicio */
 #start-content {
     position: absolute;
     z-index: 2;
@@ -69,7 +56,6 @@ body {
     transform: translate(-50%, -50%);
 }
 
-/* Logo en la pantalla de inicio */
 #start-logo img {
     width: 200px;
     height: auto;
@@ -77,7 +63,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Botones de la pantalla de inicio */
 .start-button {
     width: 250px;
     padding: 10px;
@@ -101,14 +86,12 @@ body {
     color: #1e1e1e;
 }
 
-/* Botón de sonido en la pantalla de inicio */
 #sound-button img {
     width: 24px;
     height: 24px;
     margin-left: 10px;
 }
 
-/* Selección de dificultad */
 #difficulty-selection {
     margin-bottom: 10px;
 }
@@ -142,7 +125,6 @@ body {
     box-sizing: border-box;
 }
 
-/* Estado seleccionado de la dificultad */
 .difficulty-button.selected {
     background-color: #3a3a3a;
     color: #fff;
@@ -153,7 +135,6 @@ body {
     color: #1e1e1e;
 }
 
-/* Ajustes de borde en los botones de dificultad */
 .difficulty-button:first-child {
     border-right: none;
     border-radius: 5px 0 0 5px;
@@ -167,7 +148,6 @@ body {
     border-right: none;
 }
 
-/* Canvas del inicio (duplicado, probablemente opcional) */
 #start-canvas {
     position: absolute;
     top: 0;
@@ -177,16 +157,11 @@ body {
     image-rendering: pixelated;
 }
 
-/* ------------------------------------------------------------
-   ESTILOS DEL JUEGO
------------------------------------------------------------- */
 
-/* Clase para ocultar el contenedor del juego */
 #game-container.hidden {
     display: none !important;
 }
 
-/* Pie de página principal */
 #main-footer {
     text-align: center;
     padding: 10px;
@@ -199,10 +174,6 @@ body {
     font-size: 14px;
     color: #fff;
 }
-
-/* ------------------------------------------------------------
-   EFECTOS DE ANIMACIÓN
------------------------------------------------------------- */
 
 .fade-out {
     animation: fadeOut 1s forwards;
@@ -229,7 +200,6 @@ body {
     }
 }
 
-/* Animaciones de deslizado hacia arriba */
 @keyframes slideUpOut {
     to {
         opacity: 0;
@@ -254,9 +224,6 @@ body {
     animation: slideUpIn 1s forwards;
 }
 
-/* ------------------------------------------------------------
-   MODAL DE INFORMACIÓN
------------------------------------------------------------- */
 
 #info-modal {
     position: fixed;
@@ -301,10 +268,6 @@ body {
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
 }
-
-/* ------------------------------------------------------------
-   RESPONSIVE (PANTALLAS PEQUEÑAS)
------------------------------------------------------------- */
 
 @media (max-width: 1000px) {
     #start-content {
