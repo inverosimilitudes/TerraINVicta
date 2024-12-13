@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap');
 
-/* ------------------------------------------------------------
-   ESTILOS GLOBALES
------------------------------------------------------------- */
-
 body {
     margin: 0;
     padding: 0;
@@ -12,7 +8,6 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-/* Fondo principal */
 #background-image {
     position: fixed;
     top: 0;
@@ -24,10 +19,6 @@ body {
     z-index: -1; 
 }
 
-/* ------------------------------------------------------------
-   LOGO DEL JUEGO (EN LA UI DEL JUEGO)
------------------------------------------------------------- */
-
 #logo {
     margin-bottom: 20px;
 }
@@ -38,10 +29,6 @@ body {
     image-rendering: pixelated;
 }
 
-/* ------------------------------------------------------------
-   CONTENEDOR PRINCIPAL DEL JUEGO
------------------------------------------------------------- */
-
 #game-container {
     display: flex;
     flex-wrap: nowrap;
@@ -51,24 +38,16 @@ body {
     max-width: 1200px;
 }
 
-/* ------------------------------------------------------------
-   CANVAS DEL JUEGO
------------------------------------------------------------- */
-
 #game-canvas {
     width: 800px;
     height: 730px;
     border: 1px solid #fff;
     image-rendering: pixelated; 
-    background-image: url('../assets/background.png');
+    background-image: url('/TerraINVicta/assets/background.png');
     background-size: 100% auto; 
     background-position: bottom center; 
     background-repeat: no-repeat; 
 }
-
-/* ------------------------------------------------------------
-   CONTENEDOR DE LA INTERFAZ DE USUARIO DENTRO DEL JUEGO
------------------------------------------------------------- */
 
 #ui-container {
     display: flex;
@@ -76,10 +55,6 @@ body {
     align-items: center;
     margin-left: 20px;
 }
-
-/* ------------------------------------------------------------
-   SECCIÓN DE ESTADÍSTICAS (VIDAS, PUNTAJE, TIEMPO)
------------------------------------------------------------- */
 
 #stats {
     display: flex;
@@ -115,10 +90,6 @@ body {
     transform: scale(1.5);
     color: #ff0;
 }
-
-/* ------------------------------------------------------------
-   BOTONES DE CONTROL (PAUSA, RESET, MUTE, ETC.)
------------------------------------------------------------- */
 
 #buttons {
     display: flex;
@@ -164,10 +135,6 @@ body {
     height: 24px;
 }
 
-/* ------------------------------------------------------------
-   VIDAS (CORAZONES)
------------------------------------------------------------- */
-
 #lives-container {
     display: flex;
     flex-direction: column;
@@ -190,10 +157,6 @@ body {
 .heart-animation {
     transform: scale(1.5);
 }
-
-/* ------------------------------------------------------------
-   PANTALLA DE GAME OVER
------------------------------------------------------------- */
 
 #game-over-screen {
     position: fixed;
@@ -226,20 +189,15 @@ body {
     cursor: pointer;
 }
 
-/* Campo de texto oculto (para capturar input en móviles) */
 #hidden-input {
     display: none;
 }
-
-/* ------------------------------------------------------------
-   MEDIA QUERIES: AJUSTES PARA PANTALLAS PEQUEÑAS (MÓVILES)
------------------------------------------------------------- */
 
 @media (max-width: 1000px) {
     html, body {
         margin: 0;
         padding: 0;
-        overflow: hidden; /* Evita scroll vertical */
+        overflow: hidden;
         height: 100%;
         touch-action: none; 
         overscroll-behavior: none;
@@ -257,7 +215,7 @@ body {
 
     #game-container {
         display: flex;
-        flex-direction: column; /* Canvas arriba, luego UI */
+        flex-direction: column; 
         justify-content: flex-start;
         align-items: center; 
         width: 100%;
@@ -271,11 +229,11 @@ body {
         height: auto;
         border: 1px solid #fff;
         image-rendering: pixelated; 
-        background-image: url('../assets/background.png');
+        background-image: url('/TerraINVicta/assets/background.png');
         background-size: 100% auto; 
         background-position: bottom center; 
         background-repeat: no-repeat; 
-        margin: 0; /* Sin márgenes */
+        margin: 0; 
         padding: 0;
     }
 
@@ -414,10 +372,6 @@ body {
     }
 }
 
-/* ------------------------------------------------------------
-   FOOTER (PIE DE PÁGINA)
------------------------------------------------------------- */
-
 #main-footer {
     position: fixed;
     bottom: 0;
@@ -433,11 +387,6 @@ body {
     font-size: 14px;
     color: #fff;
 }
-
-/* ------------------------------------------------------------
-   MODAL DE INFORMACIÓN
------------------------------------------------------------- */
-
 #info-modal {
     position: fixed;
     top: 0;
